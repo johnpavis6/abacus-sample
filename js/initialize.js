@@ -1,0 +1,20 @@
+$(document).ready(()=>{
+	$('.loading').hide();
+	$('.body').fadeIn(1000);
+});
+window_height=$(window).outerHeight();
+card_body_height=window_height*0.9,card_footer_height=window_height*0.1;
+__={
+	'.main-card-body,.home,.apps,.recents,.app':{'height':card_body_height,},
+	'.main-card-footer':{'height':card_footer_height,},
+	'.home-footer':{'margin-top':card_body_height*0.85},
+	'.notifications':{height:0}
+};
+for(_ in __){
+	$(_).css(__[_]);
+}
+arrowSizes=[20,30],ai=1;
+(toggleArrows=()=>{
+	$('.arrows').animate({'font-size':arrowSizes[ai=(ai+1)%2]});
+	setTimeout(toggleArrows,500);
+})();

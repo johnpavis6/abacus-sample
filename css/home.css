@@ -1,0 +1,59 @@
+::-webkit-scrollbar { 
+	display: none; 
+}
+.notifications,.body,.apps,.recents,.app{
+	display: none;
+}
+.main-card,.recents .card{
+	border: 0;
+}
+.main-card .card-body{
+	padding: 0;
+}
+.main-card .card-footer .row{
+	font-size: 20px;
+	text-align: center;
+}
+.notification-arrow,.home-footer{
+	text-align: center;
+}
+.arrows{
+	width: 100%;
+	color: green;
+	text-decoration: none !important;
+}
+.apps,.app,.notifications{
+	overflow-y: scroll;
+}
+.recents{
+	overflow-x: scroll;
+	width: 100%;
+}
+.recents .card{
+	height: 60%;
+	margin-top: 50px;
+}
+.recents .card-body{
+	border-radius: 5px;
+}
+.recents-apps{
+	overflow-x: scroll;
+	flex-wrap: nowrap;
+}
+.recents-app-close,.recents-close-all,.recents-alert{
+	margin-top: 20px;
+}
+.recents-close-all{
+	height: max-content;
+	width: 100%;
+}
+.apps .row .apps-search{
+	padding: 10px;
+}
+.apps .cards,.notifications{
+	padding: 10px;
+}
+.apps .cards .card-cover{
+	padding: 5px;
+	text-align: center;
+}

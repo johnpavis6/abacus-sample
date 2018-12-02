@@ -1,0 +1,47 @@
+showing=[];
+_push=(showing,_showing)=>{
+	ind=$.inArray(_showing,showing);
+	if(ind!=-1){showing.splice(ind,1);}
+	console.log(showing,_showing,ind);
+	if(showing.length&&showing[showing.length-1]=='notifications'){goBack(0);}
+	showing.push(_showing);
+	console.log(showing);
+}
+showApps=(time=500)=>{
+	$('.apps').show().animate({'margin-top':`-${card_body_height}px`},time);
+	_push(showing,'apps');
+}
+hideApps=(time=500)=>{
+	$('.apps').fadeOut(time).animate({'margin-top':'0px'});
+}
+showNotifications=(time=500)=>{
+	$('.notifications').show().animate({'height':`${card_body_height}px`},time);
+	_push(showing,'notifications');
+}
+hideNotifications=(time=500)=>{
+	$('.notifications').fadeOut(time).css({'height':`0px`});
+}
+showRecents=(time=500)=>{
+	$('.recents').show(time);
+	_push(showing,'recents');
+}
+hideRecents=(time=500)=>{
+	$('.recents').fadeOut(time);
+}
+goBack=(time=500)=>{
+	_showing=showing.pop();
+	if(_showing=='apps'){hideApps(time);}
+	else if(_showing=='notifications'){hideNotifications(time);}
+	else if(_showing=='recents'){hideRecents(time);}
+	else{hideApp()};
+	console.log(showing);
+}
+showHome=()=>{hideNotifications(),hideApps(),hideRecents();hideApp();}
+showApp=(appID)=>{
+	$(`#${appID}`).fadeIn(500);
+	_push(showing,appID);
+}
+hideApp=()=>{
+	$(`.app`).fadeOut(500);
+}
+// showRecents();

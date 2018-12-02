@@ -1,0 +1,120 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Abacus 2K18</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<link rel="stylesheet" href="./css/home.css">
+</head>
+<body ng-app="myApps" ng-controller="appsCtrl">
+	<div class="loading">
+		<div class="alert alert-success">Loading...</div>
+	</div>
+	<div class="body">
+		<div class="card main-card">
+			<div class="card-body main-card-body">
+				<div class="apps-body fixed-top">
+					<div class="app card bg-light" ng-repeat="app in apps" id="app_{{app.id}}" ng-model="app.id">
+						<div class="card-header">{{app.name}}</div>
+						<div class="card-body">{{app.body}}</div>
+					</div>
+				</div>
+				<div class="recents fixed-top bg-dark">
+					<div class="recents-apps container-fluid row">
+						<div class="recents-app col-lg-3 col-md-4 col-6" ng-repeat="app in recents">
+							<div class="card bg-light" ng-click=showApp(app.id)>
+								<div ng-bind-html='app.html'></div>
+							</div>
+							<div class="recents-app-close d-flex justify-content-center bg-dark">
+								<button class="btn btn-outline-warning" ng-click=closeApp(app.id)>X</button>
+							</div>
+						</div>
+					</div>
+					<div class="alert alert-warning text-center recents-alert" ng-hide="recents.length">No Recent Apps</div>
+					<div class="recents-close-all d-flex justify-content-center bg-dark row">
+						<button class="btn btn-outline-danger" ng-click=closeAll(); ng-show="recents.length">ClearAll</button>
+					</div>
+				</div>
+				<div class="notification-arrow fixed-top">
+					<a href="#" onclick=showNotifications(); class="fas fa-angle-down arrows" id="down-arrow"></a>
+				</div>
+				<div class="notifications container-fluid fixed-top bg-dark text-center">
+					<div class="alert alert-success" ng-repeat="no in [1,2,3,4,5,6,7,8,9]">Notification {{no}}</div>
+				</div>
+				<div class="home container-fluid bg-dark">
+					<div class="home-body text-center text-info">
+						<h1>ABACUS 2K18</h1>
+					</div>
+					<div class="home-footer">
+						<a href="#" onclick=showApps(); class="fas fa-angle-up arrows" id="up-arrow"></a>
+					</div>
+				</div>
+				<div class="apps container-fluid bg-dark">
+					<div class="row sticky-top">
+						<div class="apps-search col">
+							<input type="search" class="form-control" id="apps-search" ng-model='search'>
+						</div>
+					</div>
+					<div class="row d-flex justify-content-center">
+						<div class="btn btn-outline-primary" >
+							Technical Events
+						</div>
+					</div>
+					<div class="row cards">
+						<div class="card-cover col-lg-2 col-4" ng-repeat="event in techEvents | filter:search">
+							<div class='card btn btn-secondary text-info' onclick="showApp(this.id)" id="app_{{event.id}}" ng-click=__push('app_'+event.id)>
+								<div class='card-body'>{{event.name}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="row d-flex justify-content-center">
+						<div class="btn btn-outline-primary">
+							Non Technical Events
+						</div>
+					</div>
+					<div class="row cards">
+						<div class="card-cover col-lg-2 col-4" ng-repeat="event in nonTechEvents | filter:search">
+							<div class='card btn btn-secondary text-info' onclick="showApp(this.id)" id="app_{{event.id}}" ng-click=__push('app_'+event.id)>
+								<div class='card-body'>{{event.name}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="row d-flex justify-content-center">
+						<div class="btn btn-outline-primary">
+							Workshops
+						</div>
+					</div>
+					<div class="row cards">
+						<div class="card-cover col-lg-2 col-4" ng-repeat="workshop in workshops | filter:search">
+							<div class='card btn btn-secondary text-info' onclick="showApp(this.id)" id="app_{{workshop.id}}" ng-click=__push('app_'+workshop.id)>
+								<div class='card-body'>{{workshop.name}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer fixed-bottom bg-light main-card-footer">
+				<div class="row">
+					<a class="col" href="#" onclick=showRecents();>
+						<i class="far fa-square"></i>
+					</a>
+					<a class="col" href="#" onclick=showHome();>
+						<i class="far fa-circle"></i>
+					</a>
+					<a class="col" href="#" onclick=goBack();>
+						<i class="fas fa-caret-left"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="./js/initialize.js"></script>
+<script src="./js/functions.js"></script>
+<script src="./js/filter.js"></script>
+</html>
